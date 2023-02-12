@@ -1,0 +1,42 @@
+# kubectl expose deploy wakja-deployment --port 80
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wakja-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: wakja-pod
+  template:
+    metadata:
+      labels:
+        app: wakja-pod
+    spec:
+      containers:
+      - name: wakja-pod
+        image: projectallthing/sitelink-api
+        ports:
+        - containerPort: 80
+        env:
+        - name: PORT
+          value: "80"
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wakja-ingress
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wakja-deployment
+            port:
+              number: 80
