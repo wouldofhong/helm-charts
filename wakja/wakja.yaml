@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: wakja-pod
-        image: projectallthing/sitelink-api
+        image: projectallthing/sitelink-api:0.3
         ports:
         - containerPort: 80
         env:
