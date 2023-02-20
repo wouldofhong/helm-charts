@@ -1,4 +1,7 @@
 {
+    "vs-kubernetes": {
+        "disable-linters": ["resource-limits"]
+    },
     "yaml.schemas": {
         "kubernetes://schema/apps/v1%40deployment": "file:///home/park/project/helm-charts/wakja/wakja.yaml"
     }
